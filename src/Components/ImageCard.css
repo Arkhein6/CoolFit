@@ -1,0 +1,21 @@
+.image_card_image {
+    height:380px;
+}
+
+.image_card_description {
+    text-align: center;
+    height: 20%;
+    background-color: white;
+    padding-block: 0.5rem;
+}
+
+.image_card_price_tag {
+    text-align: center;
+   display: flex;
+   gap:1rem;
+   justify-content: center;
+}
+
+.image_card_price_status_sold {
+    color:gray;
+}
