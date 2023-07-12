@@ -9,31 +9,41 @@ import OverflowCard from './Components/OverflowCard'
 
 const App = () => {
     const [time,setTime] = React.useState({
-        hours:10,
-        minutes:10,
-        seconds:10
+        hours:23,
+        minutes:59,
+        seconds:59
     })
-
+    
     React.useEffect(() => {
-        setTimeout(() => {
-            setTime(current => {
-                return {
-                    ...,
-                    seconds: current.seconds -= 1
-                }
-            })
-        }, 1000);
-
-        if (time.seconds === 0){
-             setTime(current => {
-                return {
-                    seconds: 10,
-                    minutes: current.minutes === 0 ? 10 : current.minutes -= 1,
-                    hours: current.hours === 0? 10 : current.hours -= 1
-                }
-            })
+        if (time.seconds === 0) {
+            setTimeout(() => {
+                setTime((current) => {
+                    return {
+                        seconds: 59,
+                        hours:
+                            current.minutes === 0
+                                ? current.hours === 0
+                                    ? 23
+                                    : (current.hours -= 1)
+                                : current.hours,
+                        minutes:
+                            current.minutes === 0 ? 59 : (current.minutes -= 1),
+                    };
+                });
+        
+            }, 1000);
+            
         }
-
+        else {
+        setTimeout(() => {
+            setTime((current) => {
+                return {
+                    ...current,
+                    seconds: (current.seconds -= 1),
+                };
+            });
+        }, 1000);
+    }
 
     },[time.seconds])
     
@@ -197,15 +207,15 @@ const App = () => {
                               </div>
                               <div className="deal_of_the_day_time">
                                   <div>
-                                      <p>{hours}</p>
+                                      <p>{time.hours}</p>
                                       <span>Hour</span>
                                   </div>
                                   <div>
-                                      <p>{minutes}</p>
+                                      <p>{time.minutes}</p>
                                       <span>Minute</span>
                                   </div>
                                   <div>
-                                      <p>{seconds}</p>
+                                      <p>{time.seconds}</p>
                                       <span>Second</span>
                                   </div>
                               </div>
@@ -219,7 +229,15 @@ const App = () => {
                       </div>
                   </section>
                   <section className="testimony main_container">
-                      <div className="testimony_container"></div>
+                      <div className="testimony_container">
+                        <div className='testimony_text'>
+                            <h2>Testomines</h2>
+                            <p>Here is what our customers said about us!</p>
+                        </div>
+                        <div className='testimony_testimones'>
+
+                        </div>
+                      </div>
                   </section>
               </div>
           </main>
