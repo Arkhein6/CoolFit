@@ -1,12 +1,42 @@
+/* eslint-disable no-constant-condition */
 /* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import './App.css'
-import {Artists_gallery,Our_Products} from './assets/images'
+import {Artists_gallery,Our_Products,New_collections,Section_boards} from './assets/images'
 import ImageCard from './Components/ImageCard'
 import OverflowCard from './Components/OverflowCard'
 
 const App = () => {
+    const [time,setTime] = React.useState({
+        hours:10,
+        minutes:10,
+        seconds:10
+    })
+
+    React.useEffect(() => {
+        setTimeout(() => {
+            setTime(current => {
+                return {
+                    ...,
+                    seconds: current.seconds -= 1
+                }
+            })
+        }, 1000);
+
+        if (time.seconds === 0){
+             setTime(current => {
+                return {
+                    seconds: 10,
+                    minutes: current.minutes === 0 ? 10 : current.minutes -= 1,
+                    hours: current.hours === 0? 10 : current.hours -= 1
+                }
+            })
+        }
+
+
+    },[time.seconds])
+    
   return (
       <>
           <header className="header">
@@ -46,7 +76,7 @@ const App = () => {
                           </a>
                       </div>
                       <div className="hero_section_image">
-                          <img src="./src/assets/hero.jpg" />
+                          <img src={Section_boards[0].image} />
                       </div>
                   </div>
               </section>
@@ -61,15 +91,15 @@ const App = () => {
                           </p>
                       </div>
                       <div className="new_collections_images">
-                          <img src="./src/assets/hero.jpg" />
-                          <img src="./src/assets/hero.jpg" />
-                          <img src="./src/assets/hero.jpg" />
+                          {New_collections.map((item) => {
+                              return <img src={item.image} />;
+                          })}
                       </div>
                   </section>
                   <section className="best_fashion main_container">
                       <div className="best_fashion_container">
                           <div className="best_fashion_image">
-                              <img src="./src/assets/hero.jpg" />
+                              <img src={Section_boards[1].image} />
                               <div className="best_fashion_overlay_box">
                                   <div>
                                       <h3>2014</h3>
@@ -139,13 +169,13 @@ const App = () => {
                               </div>
                           </div>
                           <div className="our_product_images">
-                              {Our_Products.map((image) => {
+                              {Our_Products.map((item) => {
                                   return (
                                       <ImageCard
-                                          Image={image}
-                                          key={image}
-                                          status={"Sold"}
-                                          price={"4.99"}
+                                          Image={item.image}
+                                          key={item.id}
+                                          status={item.status}
+                                          price={item.price}
                                       />
                                   );
                               })}
@@ -167,15 +197,15 @@ const App = () => {
                               </div>
                               <div className="deal_of_the_day_time">
                                   <div>
-                                      <p>03</p>
+                                      <p>{hours}</p>
                                       <span>Hour</span>
                                   </div>
                                   <div>
-                                      <p>08</p>
+                                      <p>{minutes}</p>
                                       <span>Minute</span>
                                   </div>
                                   <div>
-                                      <p>09</p>
+                                      <p>{seconds}</p>
                                       <span>Second</span>
                                   </div>
                               </div>
@@ -184,7 +214,7 @@ const App = () => {
                               </a>
                           </div>
                           <div className="deal_of_the_day_image">
-                              <img src="./src/assets/hero.jpg" />
+                              <img src={Section_boards[2].image} />
                           </div>
                       </div>
                   </section>
@@ -195,27 +225,29 @@ const App = () => {
           </main>
           <footer className="footer">
               <div className="artist_gallery small_screen">
-                  {Artists_gallery.map((image) => {
+                  {Artists_gallery.map((item) => {
                       return (
                           <div className="artist_gallery_image ">
-                              <img src={image} />
+                              <img src={item.image} />
                           </div>
                       );
                   })}
                   <div className="artist_gallery_board">
-                      <span>Meet our distinguished and cherished designers</span>
+                      <span>
+                          Meet our distinguished and cherished designers
+                      </span>
                   </div>
               </div>
 
               <div className="footer_container">
-                  <div className='footer_links'>
+                  <div className="footer_links">
                       <a href="#">Damn</a>
                       <a href="#">Damn</a>
                       <a href="#">Damn</a>
                       <a href="#">Damn</a>
                       <a href="#">Damn</a>
                   </div>
-                  <div className='footer_copyright'>
+                  <div className="footer_copyright">
                       <p>Copyright 2023</p>
                       <p>All rights Reserved</p>
                   </div>

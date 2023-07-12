@@ -11,7 +11,7 @@ const ImageCard = (props) => {
         </div>
         <div className='image_card_description'>
             <div>Stars</div>
-            <p>Lorem Ipsum Darum</p>
+            <p>Lorem Ipsum Darumde</p>
             <div className='image_card_price_tag'>
                 <p className={props.status ==="Sold" ?"image_card_price_status_sold": ''}>{props.status}</p>
                 <p>${props.price}</p>

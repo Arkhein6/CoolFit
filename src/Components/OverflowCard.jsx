@@ -4,35 +4,46 @@
 import React from "react";
 import "./OverflowCard.css";
 import { Seller_Products } from "../assets/images";
+import { motion } from "framer-motion";
 
-const OverflowCard = (props) => {
+const OverflowCard = () => {
+    const [width,setWidth] = React.useState(0)
+    const Carousel = React.useRef()
+
+    React.useEffect(() => {
+      setWidth(Carousel.current.scrollWidth - Carousel.current.offsetWidth)
+    }, [])
+    
     return (
-        <div className="carousel">
-            <div className="inner_carousel">
-                {Seller_Products.map((image) => {
+        <motion.div ref={Carousel} className="carousel">
+            <motion.div drag='x' dragConstraints={{
+                right:0,
+                left:-width
+            }} className="inner_carousel">
+                {Seller_Products.map((item) => {
                     return (
-                        <div className="card">
+                        <motion.div className="card">
                             <div className="card_image">
-                                <img src={image} />
+                                <img src={item.image} />
                             </div>
                             <div className="card_description">
-                                <div>Stars</div>
-                                <p>Lorem Ipsum Darum</p>
+                                <div>{item.rating}</div>
+                                <p>{item.title}</p>
                                 <div className="card_price_tag">
-                                    <p>sold</p>
-                                    <p>$4.99</p>
+                                    <p>{item.status}</p>
+                                    <p>${item.price}</p>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     );
                 })}
-            </div>
+            </motion.div>
             <div className="indicators">
-                <div className="indicator_item"></div>
+                <div className="indicator_item ac"></div>
                 <div className="indicator_item"></div>
                 <div className="indicator_item"></div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
