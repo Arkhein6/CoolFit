@@ -4,8 +4,11 @@
 import React from 'react'
 import './App.css'
 import {Artists_gallery,Our_Products,New_collections,Section_boards} from './assets/images'
-import ImageCard from './Components/ImageCard'
 import OverflowCard from './Components/OverflowCard'
+import Footer from './Components/Footer'
+import Header from './Components/Header'
+import ImageCard from './Components/ImageCard'
+
 
 const App = () => {
     const [time,setTime] = React.useState({
@@ -49,24 +52,8 @@ const App = () => {
     
   return (
       <>
-          <header className="header">
-              <div className="header_container">
-                  <div>
-                      <h1>CoolFit</h1>
-                  </div>
-                  <div className="header_links">
-                      <a href="#">Lorem</a>
-                      <a href="#">ipsum</a>
-                      <a href="#">cortae</a>
-                      <a href="#">lemna</a>
-                      <a href="#">sum</a>
-                  </div>
-                  <div className="header_login">
-                      <a href="#">Login</a>
-                  </div>
-              </div>
-          </header>
-          <main className="main_content">
+      <Header />
+          <main className="main_content ">
               <section className="hero_section">
                   <div className="hero_section_container">
                       <div className="hero_section_text">
@@ -241,37 +228,9 @@ const App = () => {
                   </section>
               </div>
           </main>
-          <footer className="footer">
-              <div className="artist_gallery small_screen">
-                  {Artists_gallery.map((item) => {
-                      return (
-                          <div className="artist_gallery_image ">
-                              <img src={item.image} />
-                          </div>
-                      );
-                  })}
-                  <div className="artist_gallery_board">
-                      <span>
-                          Meet our distinguished and cherished designers
-                      </span>
-                  </div>
-              </div>
+        <Footer />
+        </>
 
-              <div className="footer_container">
-                  <div className="footer_links">
-                      <a href="#">Damn</a>
-                      <a href="#">Damn</a>
-                      <a href="#">Damn</a>
-                      <a href="#">Damn</a>
-                      <a href="#">Damn</a>
-                  </div>
-                  <div className="footer_copyright">
-                      <p>Copyright 2023</p>
-                      <p>All rights Reserved</p>
-                  </div>
-              </div>
-          </footer>
-      </>
   );
 }
 
